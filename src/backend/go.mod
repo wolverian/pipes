@@ -1,4 +1,4 @@
-module github.com/wolverian/pipes
+module github.com/wolverian/pipes/src/backend
 
 go 1.12
 
