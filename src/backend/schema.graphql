@@ -1,0 +1,18 @@
+type Pipeline @model {
+  id: ID!
+  name: String!
+  status: String!
+  stages: [Stage] @connection(name: "PipelineStages")
+}
+type Stage @model {
+  id: ID!
+  name: String!
+  status: String!
+  blog: Pipeline @connection(name: "PipelineStages")
+  actions: [Action] @connection(name: "StageActions")
+}
+type Action @model {
+  id: ID!
+  status: String!
+  Stage: Stage @connection(name: "StageActions")
+}

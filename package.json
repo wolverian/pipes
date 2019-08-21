@@ -4,7 +4,8 @@
   "description": "Display CodePipelines status",
   "scripts": {
     "watch": "cd src/frontend && npm run watch",
-    "build": "cd src/frontend && npm run build",
+    "build-frontend": "cd src/frontend && npm run build",
+    "build-backend": "cp src/backend/schema.graphql amplify/backend/api/pipes/",
     "start": "cd src/backend && npm run start",
     "deps": "npm ci && cd src/frontend && npm ci"
   },
