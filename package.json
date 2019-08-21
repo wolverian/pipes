@@ -4,7 +4,7 @@
   "description": "Display CodePipelines status",
   "scripts": {
     "watch": "tsc -w",
-    "build": "tsc",
+    "build": "tsc && cp index.html build/",
     "start": ""
   },
   "repository": {
