@@ -2,12 +2,17 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/codepipeline"
+	"github.com/gosuri/uilive"
 )
+
+const defaultPollInterval = 5 * time.Second
 
 func main() {
 	sess := getSession()
@@ -19,12 +24,19 @@ func main() {
 		log.Fatal(err)
 	}
 
-	for _, p := range out.Pipelines {
-		printPipelineState(cp, p.Name)
+	w := uilive.New()
+	w.Start()
+	defer w.Stop()
+
+	for {
+		for _, p := range out.Pipelines {
+			printPipelineState(w, cp, p.Name)
+		}
+		time.Sleep(defaultPollInterval)
 	}
 }
 
-func printPipelineState(cp *codepipeline.CodePipeline, name *string) {
+func printPipelineState(w io.Writer, cp *codepipeline.CodePipeline, name *string) {
 	out, err := cp.GetPipelineState(&codepipeline.GetPipelineStateInput{
 		Name: name,
 	})
@@ -32,14 +44,14 @@ func printPipelineState(cp *codepipeline.CodePipeline, name *string) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(*name)
+	fmt.Fprintln(w, *name)
 
 	for _, st := range out.StageStates {
-		fmt.Printf("%s %s:\n", getStateDecoration(*st.LatestExecution.Status), *st.StageName)
+		fmt.Fprintf(w, "%s %s:\n", getStateDecoration(*st.LatestExecution.Status), *st.StageName)
 		for _, act := range st.ActionStates {
-			fmt.Printf("\t %s %s\n", getStateDecoration(*act.LatestExecution.Status), *act.ActionName)
+			fmt.Fprintf(w, "\t %s %s\n", getStateDecoration(*act.LatestExecution.Status), *act.ActionName)
 		}
-		fmt.Println()
+		fmt.Fprintln(w)
 	}
 }
 
