@@ -9,6 +9,11 @@
             "UnauthRoleName": "pipes-dev-20190821173837-unauthRole",
             "StackName": "pipes-dev-20190821173837",
             "StackId": "arn:aws:cloudformation:eu-west-1:786973186384:stack/pipes-dev-20190821173837/5cef6af0-c421-11e9-baf7-0afa58e29f3e"
+        },
+        "categories": {
+            "auth": {
+                "cognitoaef1f4b3": {}
+            }
         }
     }
 }
