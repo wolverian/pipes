@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir dist && cp src/*.js src/*.html dist/",
-    "start": "cd -p dist && python -m SimpleHTTPServer"
+    "build": "mkdir -p dist && cp src/*.js src/*.html dist/",
+    "start": "cd dist && python -m SimpleHTTPServer"
   },
   "repository": {
     "type": "git",
