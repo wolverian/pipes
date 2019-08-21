@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -11,25 +10,30 @@ import (
 )
 
 func main() {
-	name := os.Args[1]
-	if name == "" {
-		fmt.Fprintln(os.Stderr, "usage: pipes <pipeline name>")
-		os.Exit(1)
-	}
-
 	sess := getSession()
 
 	cp := codepipeline.New(sess)
 
+	out, err := cp.ListPipelines(&codepipeline.ListPipelinesInput{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, p := range out.Pipelines {
+		printPipelineState(cp, p.Name)
+	}
+}
+
+func printPipelineState(cp *codepipeline.CodePipeline, name *string) {
 	out, err := cp.GetPipelineState(&codepipeline.GetPipelineStateInput{
-		Name: aws.String(name),
+		Name: name,
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, st := range out.StageStates {
-		fmt.Printf("%s: %s\n", *st.StageName, *st.LatestExecution.Status)
+		fmt.Printf("[%s] %s: %s\n", *name, *st.StageName, *st.LatestExecution.Status)
 	}
 }
 
