@@ -1,0 +1,24 @@
+{
+  "name": "pipes",
+  "version": "0.1.0",
+  "description": "Display CodePipelines status",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsc",
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolverian/pipes.git"
+  },
+  "author": "Ilmari Vacklin <ilmari.vacklin@iki.fi>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolverian/pipes/issues"
+  },
+  "homepage": "https://github.com/wolverian/pipes#readme",
+  "devDependencies": {
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.3"
+  }
+}
