@@ -6,7 +6,7 @@
     "watch": "cd src/frontend && npm run watch",
     "build-frontend": "cd src/frontend && npm run build",
     "build-backend": "mkdir -p amplify/backend/api/pipes/ && cp src/backend/schema.graphql amplify/backend/api/pipes/",
-    "start": "cd src/backend && npm run start",
+    "start-frontend": "false",
     "deps": "npm ci && cd src/frontend && npm ci"
   },
   "repository": {

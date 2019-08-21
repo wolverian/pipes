@@ -7,8 +7,8 @@
         "config": {
             "SourceDir": "src/frontend",
             "DistributionDir": "src/frontend/build",
-            "BuildCommand": "npm run-script build",
-            "StartCommand": "npm run-script start"
+            "BuildCommand": "npm run-script build-frontend",
+            "StartCommand": "npm run-script start-frontend"
         }
     },
     "providers": [
