@@ -32,9 +32,14 @@ func printPipelineState(cp *codepipeline.CodePipeline, name *string) {
 		log.Fatal(err)
 	}
 
+	fmt.Println(*name)
+
 	for _, st := range out.StageStates {
-		fmt.Printf("[%s] %s: %s\n", *name, *st.StageName, *st.LatestExecution.Status)
-		// todo(@wolverian): add actions here
+		fmt.Printf("[%s: %s]\n", *st.StageName, *st.LatestExecution.Status)
+		for _, act := range st.ActionStates {
+			fmt.Printf("[%s: %s] ", *act.ActionName, *act.LatestExecution.Status)
+		}
+		fmt.Println()
 	}
 }
 
