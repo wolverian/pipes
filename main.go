@@ -14,6 +14,7 @@ func main() {
 	name := os.Args[1]
 	if name == "" {
 		fmt.Fprintln(os.Stderr, "usage: pipes <pipeline name>")
+		os.Exit(1)
 	}
 
 	sess := getSession()
