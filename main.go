@@ -35,9 +35,9 @@ func printPipelineState(cp *codepipeline.CodePipeline, name *string) {
 	fmt.Println(*name)
 
 	for _, st := range out.StageStates {
-		fmt.Printf("[%s: %s]\n", *st.StageName, *st.LatestExecution.Status)
+		fmt.Printf("%s %s:\n", getStateDecoration(*st.LatestExecution.Status), *st.StageName)
 		for _, act := range st.ActionStates {
-			fmt.Printf("[%s: %s] ", *act.ActionName, *act.LatestExecution.Status)
+			fmt.Printf("\t %s %s\n", getStateDecoration(*act.LatestExecution.Status), *act.ActionName)
 		}
 		fmt.Println()
 	}
@@ -48,4 +48,19 @@ func getSession() *session.Session {
 		SharedConfigState: session.SharedConfigEnable,
 		Config:            *aws.NewConfig().WithCredentialsChainVerboseErrors(true),
 	}))
+}
+
+func getStateDecoration(status string) string {
+	var state string
+	switch status {
+	case codepipeline.ActionExecutionStatusSucceeded:
+		state = "✅"
+	case codepipeline.ActionExecutionStatusFailed:
+		state = "❌"
+	case codepipeline.ActionExecutionStatusInProgress:
+		state = "🏃‍♀️"
+	default:
+		return status
+	}
+	return state
 }
