@@ -63,7 +63,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "pipes-dev-20190821173837-deployment",
-					"S3Key": "amplify-builds/status-734e6d48742b734d5a59-build.zip"
+					"S3Key": "amplify-builds/status-746367704a42444d7541-build.zip"
 				}
 			}
 		},

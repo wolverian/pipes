@@ -13,6 +13,9 @@
         "categories": {
             "auth": {
                 "cognitoaef1f4b3": {}
+            },
+            "function": {
+                "status": {}
             }
         }
     }
