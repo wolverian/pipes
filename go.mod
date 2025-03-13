@@ -7,5 +7,5 @@ require (
 	github.com/gosuri/uilive v0.0.3
 	github.com/mattn/go-isatty v0.0.17 // indirect
 	github.com/stretchr/testify v1.4.0 // indirect
-	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 )
